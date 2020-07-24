@@ -41,7 +41,31 @@ app.post("/api/notes", function (req, res) {
 
 
     })
+    res.send("success")
 })
+
+// route to delete note based on an id, in this case the index +1
+app.delete("/api/notes/:id", function (req, res) {
+
+    var id = (req.params.id) - 1;
+    fs.readFile("./db/db.json", "utf-8", function (err, data) {
+        if (err) { throw err }
+        var jData = JSON.parse(data);
+        console.log(jData)
+        console.log(id)
+        jData.splice(id, 1);
+        fs.writeFile("./db/db.json", JSON.stringify(jData), "utf-8", function (err) {
+            if (err) {
+                throw err
+            }
+            console.log("success")
+        })
+
+
+    })
+    res.send("success")
+})
+
 
 
 app.listen(PORT, function () {
