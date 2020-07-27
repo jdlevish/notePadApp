@@ -30,54 +30,13 @@
         </div>
       </div>
       <div class="col-8">
-        <form>
-
-          <br>
-          <input class="note-title " id="title" placeholder="Note Title" type="text">
-          <br>
-
-          <br>
-          <textarea class="note-textarea " id="text" placeholder="Note Text"></textarea>
-          <br>
-          <button class="submit" type="submit">Submit</button>
-        </form>
+        <input class="note-title" placeholder="Note Title" maxlength="28" type="text">
+        <textarea class="note-textarea" placeholder="Note Text"></textarea>
       </div>
     </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="/assets/js/index.js"></script>
-  <script>
-    $(".submit").on("click", function (event) {
-
-
-      // Here we grab the form elements
-      var newNote = {
-        title: $("#title").val().trim(),
-        text: $("#text").val().trim(),
-
-      };
-
-      console.log(newNote);
-
-      // This line is the magic. It"s very similar to the standard ajax function we used.
-      // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
-      // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
-      // depending on if a tables is available or not.
-
-      $.post("/api/notes", newNote, function (data) {
-        console.log(data)
-        if (data) {
-          alert("your note has been added")
-
-
-          // Clear the form when submitting
-          $("#title").val("");
-          $("#text").val("");
-        }
-
-      });
-    });
-  </script>
 </body>
 
 </html>

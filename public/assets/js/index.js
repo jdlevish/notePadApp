@@ -51,10 +51,13 @@ const renderActiveNote = () => {
 
 // Get the note data from the inputs, save it to the db and update the view
 const handleNoteSave = function () {
+
   const newNote = {
-    title: $noteTitle.val(),
-    text: $noteText.val(),
+    title: $noteTitle.val().trim(),
+    text: $noteText.val().trim(),
+
   };
+  console.log(newNote)
 
   saveNote(newNote).then(() => {
     getAndRenderNotes();
@@ -66,7 +69,7 @@ const handleNoteSave = function () {
 const handleNoteDelete = function (event) {
   // prevents the click listener for the list from being called when the button inside of it is clicked
   event.stopPropagation();
-
+  console.log($(".list-group"))
   const note = $(this).parent(".list-group-item").data();
 
   if (activeNote.id === note.id) {
@@ -99,6 +102,7 @@ const handleRenderSaveBtn = function () {
   } else {
     $saveNoteBtn.show();
   }
+
 };
 
 // Render's the list of note titles
